@@ -29,8 +29,12 @@ entity atlys_lab_video is
              clk : in std_logic; -- 100 MHz
              reset : in std_logic;
 				 up : in std_logic;
+				 switch1 : in std_logic;
+				 switch2 : in std_logic;
+				 switch3 : in std_logic;
+				 switch4 : in std_logic;
 				 down : in std_logic;
-				 switch : in std_logic;
+				 adc_in : in std_logic_vector(7 downto 0);
              tmds : out std_logic_vector(3 downto 0);
              tmdsb : out std_logic_vector(3 downto 0)
          );
@@ -49,9 +53,12 @@ COMPONENT pixel_gen
 		row     : IN unsigned(10 downto 0);
 		column  : IN unsigned(10 downto 0);
 		blank   : IN std_logic;
-		ball_x  : IN unsigned(10 downto 0);
-		ball_y  : IN unsigned(10 downto 0);
-		paddle_y: IN unsigned(10 downto 0);
+		x_comp  : IN unsigned(10 downto 0);
+		voltage : IN std_logic_vector(7 downto 0);
+		switch1  : IN std_logic;
+		switch2  : IN std_logic;
+		switch3  : IN std_logic;
+		switch4  : IN std_logic;
 		r 		  : OUT std_logic_vector(7 downto 0);
 		g 		  : OUT std_logic_vector(7 downto 0);
 		b       : OUT std_logic_vector(7 downto 0)
@@ -71,22 +78,20 @@ COMPONENT vga_sync
 	);
 END COMPONENT;
 
-COMPONENT pong_control
-	PORT(
-		clk : IN std_logic;
-		reset: IN std_logic;
-		up: IN std_logic;
-		down: IN std_logic;
-		switch: IN std_logic;
-		v_completed: IN std_logic;
-		ball_x: OUT unsigned(10 downto 0);
-		ball_y: OUT unsigned(10 downto 0);
-		paddle_y: OUT unsigned(10 downto 0)
-		);
+COMPONENT pong_control 
+	port(
+			clk		     :in std_logic;
+			reset			  :in std_logic;
+			v_completed	  :in std_logic;
+			x_pos 		  :out unsigned(10 downto 0)
+			);
 END COMPONENT;
-signal row_connector, column_connector : unsigned(10 downto 0);
-signal ball_x_sig, ball_y_sig, paddle_y_sig: unsigned(10 downto 0);
+
+
+signal row_connector, column_connector, x_pos_sig : unsigned(10 downto 0);
+
 signal red_sig, green_sig, blue_sig : std_logic_vector(7 downto 0);
+signal voltage_sig : unsigned (7 downto 0);
 signal completed_connector, pixel_clk, serialize_clk, serialize_clk_n, h_sync_sig, v_sync_sig, v_completed, blank_sig, red_s, green_s, blue_s, clock_s:std_logic;
 begin
 
@@ -135,9 +140,12 @@ begin
 	row => row_connector,
 	column => column_connector,
 	blank => blank_sig,
-	ball_x => ball_x_sig,
-	ball_y => ball_y_sig,
-	paddle_y => paddle_y_sig,
+	voltage => adc_in,
+	switch1 => switch1,
+	switch2 => switch2,
+	switch3 => switch3,
+	switch4 => switch4,
+	x_comp => x_pos_sig,
 	r => red_sig,
 	g => green_sig,
 	b => blue_sig
@@ -146,13 +154,8 @@ begin
 	Inst_pong_control: pong_control PORT MAP(
 		clk => pixel_clk,
 		reset => reset,
-		up => up,
-		down => down,
-		switch => switch,
 		v_completed => completed_connector,
-		ball_x => ball_x_sig,
-		ball_y => ball_y_sig,
-		paddle_y => paddle_y_sig
+		x_pos => x_pos_sig
 		);
 		
     -- Convert VGA signals to HDMI (actually, DVID ... but close enough)
