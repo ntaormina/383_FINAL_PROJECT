@@ -1,22 +1,6 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    17:14:50 02/13/2014 
--- Design Name: 
--- Module Name:    pixel_gen - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
+-- Engineer: C2C Taormina
+----------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 

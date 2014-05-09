@@ -1,22 +1,8 @@
 ----------------------------------------------------------------------------------
 -- Company: 
--- Engineer: 
--- 
--- Create Date:    10:03:23 02/12/2014 
--- Design Name: 
--- Module Name:    atlys_lab_video - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
+-- Engineer: C2C Nik Taormina
 ----------------------------------------------------------------------------------
+
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.NUMERIC_STD.ALL;
@@ -44,7 +30,7 @@ end atlys_lab_video;
 
 
 
-architecture Mordan of atlys_lab_video is
+architecture Taormina of atlys_lab_video is
 
 
 	
@@ -187,5 +173,5 @@ begin
     OBUFDS_clock : OBUFDS port map
         ( O => TMDS(3), OB => TMDSB(3), I => clock_s );
 
-end Mordan;
+end Taormina;
 

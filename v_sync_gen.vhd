@@ -1,21 +1,5 @@
 ----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    10:59:09 02/12/2014 
--- Design Name: 
--- Module Name:    v_sync_gen - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
+-- Engineer: C2C Taormina
 ----------------------------------------------------------------------------------
 
 library IEEE;
