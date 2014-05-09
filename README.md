@@ -34,3 +34,4 @@ been added and maybe RAM for the o-scope.
 
 Video
 =====
+https://www.youtube.com/watch?v=LdPD-mCjqf8&feature=youtu.be
